@@ -1,0 +1,17 @@
+body {
+    background-color: orange;
+}
+
+h1 {
+  text-align: center;
+}
+
+#button-div {
+  text-align: center;
+}
+button {
+  border: 2px solid red;
+  padding: 22px;
+  margin:20px;
+  font-size: 30px;
+}

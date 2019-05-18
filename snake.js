@@ -1,10 +1,11 @@
 //create snake and create apple
 var draw = function(snakeToDraw, apple) {
-  var drawableSnake = { color: "yellow", pixels: snakeToDraw };
+  var drawableSnake = { color: "green", pixels: snakeToDraw };
   var drawableApple = { color: "red", pixels: [apple] };
   var drawableObjects = [drawableSnake, drawableApple];
   CHUNK.draw(drawableObjects);
 }
+
 
 var moveSegment = function(segment) {
   switch(segment.direction) {
@@ -52,7 +53,7 @@ var advanceGame = function() {
 
   if (ate(newSnake, snake)) {
     CHUNK.endGame();
-    CHUNK.flashMessage("Chat time is over!");
+    CHUNK.flashMessage("Your Chat wait time is over!");
   }
 
   if (ate(newSnake, [apple])) {
@@ -62,5 +63,22 @@ var advanceGame = function() {
 
   if (ate(newSnake, CHUNK.gameBoundaries())) {
     CHUNK.endGame();
-    CHUNK.flashMessage("Chat time is over!");
+    CHUNK.flashMessage("Your Chat wait time is over!");
   }
+
+  snake = newSnake;
+  draw(snake, apple);
+}
+
+var changeDirection = function(direction) {
+  snake[0].direction = direction;
+}
+
+
+//Setting up my apple and snake variables
+var apple = { top: 8, left: 10 };
+
+var snake = [{ top: 1, left: 0, direction: "down" }, { top: 0, left: 0, direction: "down" }];
+
+CHUNK.executeNTimesPerSecond(advanceGame, 5);
+CHUNK.onArrowKey(changeDirection);
